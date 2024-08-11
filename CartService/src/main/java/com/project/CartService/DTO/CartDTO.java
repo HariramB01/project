@@ -13,9 +13,6 @@ public class CartDTO {
     @NotNull(message = "Item Id must not be empty")
     private Long itemId;
 
-    @NotNull(message = "Quantity must not be empty")
-    private Long quantity;
-
     // Getters and setters
 
     public Long getId() {
@@ -42,11 +39,4 @@ public class CartDTO {
         this.itemId = itemId;
     }
 
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
 }

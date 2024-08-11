@@ -17,18 +17,16 @@ public class Cart {
     private Long id;
     private String cartId;
     private Long itemId;
-    private Long quantity;
 
 
 
     public Cart() {
     }
 
-    public Cart(Long id, String cartId, Long itemId, Long quantity) {
+    public Cart(Long id, String cartId, Long itemId) {
         this.id = id;
         this.cartId = cartId;
         this.itemId = itemId;
-        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -55,21 +53,12 @@ public class Cart {
         this.itemId = itemId;
     }
 
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
     @Override
     public String toString() {
         return "Cart{" +
                 "id=" + id +
                 ", cartId='" + cartId + '\'' +
                 ", itemId=" + itemId +
-                ", quantity=" + quantity +
                 '}';
     }
 }

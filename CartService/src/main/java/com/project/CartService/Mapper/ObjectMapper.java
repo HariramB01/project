@@ -8,8 +8,7 @@ public class ObjectMapper {
         Cart cart = new Cart();
         cart.setId(cartDTO.getId()); // Generally, this should be left null to let the database handle ID generation
         cart.setCartId(cartDTO.getCartId());
-        cart.setItemId(cartDTO.getItemId());
-        cart.setQuantity(cartDTO.getQuantity()); // Set quantity directly
+        cart.setItemId(cartDTO.getItemId()); // Set quantity directly
         return cart;
     }
 }

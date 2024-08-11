@@ -43,6 +43,14 @@ public class CustomException {
         return e.getMessage();
     }
 
+
+    @ResponseStatus(HttpStatus.ALREADY_REPORTED)
+    @ExceptionHandler(ItemAlreadyExists.class)
+    public String handleItemAlreadyExists(ItemAlreadyExists e){
+        return e.getMessage();
+    }
+
+
 //    @ResponseStatus(HttpStatus.CONFLICT)
 //    @ExceptionHandler(DuplicateValueException.class)
 //    public Map<String, String> handleDuplicateValueException(DuplicateValueException e) {
