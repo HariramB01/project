@@ -18,7 +18,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart createCart(CartDTO cartDTO) {
         if (cartRepository.existsByItemId(cartDTO.getItemId())) {
-            cartRepository.delete(cartDTO.getCartId());
+            cartRepository.deleteByCartId(cartDTO.getCartId());
             throw new ItemAlreadyExists("Item already exists in the cart");
         } else {
             Cart cart = ObjectMapper.convertToCart(cartDTO);

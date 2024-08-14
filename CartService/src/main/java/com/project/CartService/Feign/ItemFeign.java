@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "ITEM-SERVICE")
+@FeignClient(name = "INVENTORY-SERVICE")
 public interface ItemFeign {
 
     @GetMapping("/{id}")
