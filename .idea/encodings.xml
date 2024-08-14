@@ -11,6 +11,8 @@
     <file url="file://$PROJECT_DIR$/PaymentService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ReviewService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ShippingService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SwaggerAggregator/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/UserService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../SwaggerAggregator/src/main/java" charset="UTF-8" />
   </component>
 </project>

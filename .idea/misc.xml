@@ -17,6 +17,8 @@
         <option value="$PROJECT_DIR$/Cart/CartService/pom.xml" />
         <option value="$PROJECT_DIR$/CartService/pom.xml" />
         <option value="$PROJECT_DIR$/APIgateway/pom.xml" />
+        <option value="$PROJECT_DIR$/../SwaggerAggregator/pom.xml" />
+        <option value="$PROJECT_DIR$/SwaggerAggregator/pom.xml" />
       </list>
     </option>
   </component>
