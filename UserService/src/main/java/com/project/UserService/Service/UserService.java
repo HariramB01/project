@@ -7,5 +7,8 @@ import jakarta.validation.Valid;
 public interface UserService {
 
     public User registerService(@Valid UserDTO user);
+    public String generateToken(String username);
+    public String vaidateToken(String token);
+
 
 }

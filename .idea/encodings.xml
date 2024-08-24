@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$USER_HOME$/Downloads/APIgateway/src/main/java" charset="UTF-8" />
+    <file url="file://$USER_HOME$/Downloads/SecurityService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/APIgateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/CartService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/EurekaServer/src/main/java" charset="UTF-8" />
@@ -11,6 +12,8 @@
     <file url="file://$PROJECT_DIR$/PaymentService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ReviewService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ShippingService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringSecurity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/SpringSecurity/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/SwaggerAggregator/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/UserService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../SwaggerAggregator/src/main/java" charset="UTF-8" />

@@ -9,7 +9,6 @@
         <module name="EurekaServer" />
         <module name="APIgateway" />
         <module name="UserService" />
-        <module name="SwaggerAggregator" />
         <module name="InventoryService" />
         <module name="ShippingService" />
         <module name="CartService" />
@@ -19,6 +18,11 @@
         <module name="PaymentService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="SecurityService" target="17" />
+      <module name="SpringSecurity" target="17" />
+      <module name="SwaggerAggregator" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -30,7 +34,9 @@
       <module name="OrderService" options="-parameters" />
       <module name="PaymentService" options="-parameters" />
       <module name="ReviewService" options="-parameters" />
+      <module name="SecurityService" options="-parameters" />
       <module name="ShippingService" options="-parameters" />
+      <module name="SpringSecurity" options="-parameters" />
       <module name="SwaggerAggregator" options="-parameters" />
       <module name="UserService" options="-parameters" />
     </option>
