@@ -25,6 +25,9 @@ public class InventoryServiceImpl implements InventoryService {
         if(inventories.isEmpty()){
             throw new NoItemsAvailableException("Currently there are no items available in the inventory.");
         }
+        for(Inventory inventory : inventories){
+            System.out.println(inventory);
+        }
         return inventories;
     }
 

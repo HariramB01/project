@@ -1,7 +1,40 @@
 spring:
   application:
     name: API-GATEWAY
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        - id: cart-service
+          uri: lb://cart-service
+          predicates:
+            - Path=/cart/**
+          filters:
+            - AuthenticationFilter
 
+
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/inventory/**
+          filters:
+            - AuthenticationFilter
+
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - AuthenticationFilter
+
+
+        - id: review-service
+          uri: lb://review-service
+          predicates:
+            - Path=/review/**
+          filters:
+            - AuthenticationFilter
 
 server:
   port: 8989
