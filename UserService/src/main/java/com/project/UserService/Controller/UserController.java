@@ -30,19 +30,19 @@ public class UserController {
     }
 
     @GetMapping("/token")
-    public String getToken(@RequestBody AuthRequest authRequest){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        if(authentication.isAuthenticated()){
+    public String getToken(@RequestBody AuthRequest authRequest) {
+        Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        if (authenticate.isAuthenticated()) {
             return userService.generateToken(authRequest.getUsername());
+        } else {
+            throw new RuntimeException("invalid access");
         }
-        throw new RuntimeException("Invalid access");
     }
 
     @GetMapping("/validate")
-    public String validateToken(@RequestParam("token") String token){
+    public String validateToken(@RequestParam("token") String token) {
         userService.vaidateToken(token);
         return "Token is valid";
     }
-
 
 }
