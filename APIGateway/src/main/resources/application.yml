@@ -1,0 +1,51 @@
+spring:
+  zipkin:
+    base-url: http://localhost:9411
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/v1/user/**,/api/address/**
+        - id: cart-service
+          uri: lb://cart-service
+          predicates:
+            - Path=/api/cart/**
+        - id: inventory-service
+          uri: lb://inventory-service
+          predicates:
+            - Path=/api/inventory/**, /api/products/**
+  main:
+    web-application-type: reactive
+#  doc:
+#    swagger-ui:
+#      enabled: true
+#      urls:
+#        - name: user-service
+#          url: /v3/api-docs
+#        - name: cart-service
+#          url: /v3/api-docs
+#        - name: inventory-service
+#          url: /v3/api-docs
+
+
+
+
+
+server:
+  port: 8989
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+springdoc:
+  swagger-ui:
+    config-url: /swagger-config.json
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
