@@ -1,7 +1,6 @@
 package com.eCommerce.UserService.Response;
 
-import com.eCommerce.UserService.DTO.Cart;
-import com.eCommerce.UserService.DTO.Wishlist;
+import com.eCommerce.CartService.Entity.Cart;
 import com.eCommerce.UserService.Entity.Address;
 
 import java.util.List;

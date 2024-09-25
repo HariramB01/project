@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Cart {
 
-
     private List<Long> productIds = new ArrayList<>();
     private double totalAmount;
 

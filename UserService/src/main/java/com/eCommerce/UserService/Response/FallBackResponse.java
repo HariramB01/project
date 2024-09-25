@@ -13,7 +13,6 @@ public class FallBackResponse {
         this.id = id;
     }
 
-    // Getter and Setter for message
     public String getMessage() {
         return message;
     }

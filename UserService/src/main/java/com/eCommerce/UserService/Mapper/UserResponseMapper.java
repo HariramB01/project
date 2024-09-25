@@ -1,7 +1,7 @@
 package com.eCommerce.UserService.Mapper;
 
-import com.eCommerce.UserService.DTO.Cart;
-import com.eCommerce.UserService.DTO.ProductDTO;
+import com.eCommerce.CartService.Entity.Cart;
+import com.eCommerce.InventoryService.DTO.ProductDTO;
 import com.eCommerce.UserService.DTO.Wishlist;
 import com.eCommerce.UserService.Entity.User;
 import com.eCommerce.UserService.Feign.CartClient;
@@ -35,7 +35,7 @@ public class UserResponseMapper {
         ur.setContact(user.getContact());
         ur.setAddresses(user.getAddresses());
 
-        logger.info("Creating cart and wishlist for user ID: {}", user.getId());
+        logger.info("Creating cart and wishlist for user ID:", user.getId());
 
         Cart cart = cartClient.createCart(user.getId());
         logger.info("Cart created: {}", cart);

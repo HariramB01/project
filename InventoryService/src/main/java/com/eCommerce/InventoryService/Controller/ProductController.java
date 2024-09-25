@@ -30,6 +30,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id) {
+//        kafkaProducerService.requestProductById(id);
         return ResponseEntity.ok(productService.getProductById(id));
     }
 

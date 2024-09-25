@@ -32,6 +32,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 		<!-- Spring Boot WebFlux for Reactive Gateway -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

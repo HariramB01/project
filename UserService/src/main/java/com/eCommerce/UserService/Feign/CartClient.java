@@ -1,6 +1,7 @@
 package com.eCommerce.UserService.Feign;
 
-import com.eCommerce.UserService.DTO.Cart;
+
+import com.eCommerce.CartService.Entity.Cart;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

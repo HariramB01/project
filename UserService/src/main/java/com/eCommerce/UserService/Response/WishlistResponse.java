@@ -1,6 +1,6 @@
 package com.eCommerce.UserService.Response;
 
-import com.eCommerce.UserService.DTO.ProductDTO;
+import com.eCommerce.InventoryService.DTO.ProductDTO;
 
 import java.util.ArrayList;
 import java.util.List;
