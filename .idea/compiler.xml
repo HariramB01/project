@@ -11,7 +11,6 @@
         <module name="InventoryService" />
         <module name="Spring-Security" />
         <module name="NotificationService" />
-        <module name="KafkaService" />
         <module name="SearchService" />
         <module name="CartService" />
         <module name="ShippingService" />
@@ -22,6 +21,9 @@
         <module name="PaymentService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="KafkaService" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
