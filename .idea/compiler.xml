@@ -11,6 +11,7 @@
         <module name="InventoryService" />
         <module name="Spring-Security" />
         <module name="NotificationService" />
+        <module name="KafkaService" />
         <module name="SearchService" />
         <module name="CartService" />
         <module name="ShippingService" />
@@ -28,6 +29,7 @@
       <module name="CartService" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
       <module name="InventoryService" options="-parameters" />
+      <module name="KafkaService" options="-parameters" />
       <module name="NotificationService" options="-parameters" />
       <module name="OrderService" options="-parameters" />
       <module name="PaymentService" options="-parameters" />
