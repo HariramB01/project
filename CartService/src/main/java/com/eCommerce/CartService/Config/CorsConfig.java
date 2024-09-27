@@ -1,4 +1,4 @@
-package com.eCommerce.CartService;
+package com.eCommerce.CartService.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

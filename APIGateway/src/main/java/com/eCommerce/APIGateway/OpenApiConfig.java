@@ -26,8 +26,8 @@ public class OpenApiConfig {
         discoveryClient.getServices().forEach(serviceName ->
                 discoveryClient.getInstances(serviceName).forEach(serviceInstance -> {
                     AbstractSwaggerUiConfigProperties.SwaggerUrl swaggerUrl = new AbstractSwaggerUiConfigProperties.SwaggerUrl();
-                    swaggerUrl.setName(serviceName); // Set the name of the service
-                    swaggerUrl.setUrl(serviceInstance.getUri() + "/v3/api-docs"); // Set the URL for Swagger docs
+                    swaggerUrl.setName(serviceName);
+                    swaggerUrl.setUrl(serviceInstance.getUri() + "/v3/api-docs");
                     urls.add(swaggerUrl);
                 })
         );

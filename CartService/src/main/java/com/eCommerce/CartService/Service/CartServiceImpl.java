@@ -2,18 +2,17 @@ package com.eCommerce.CartService.Service;
 
 
 import com.eCommerce.CartService.Client.InventoryServiceClient;
-import com.eCommerce.CartService.DTO.ProductDTO;
 import com.eCommerce.CartService.Exception.ItemAlreadyExists;
 import com.eCommerce.CartService.Exception.NoItemsAvailableException;
 import com.eCommerce.CartService.Repository.CartRepository;
 import com.eCommerce.CartService.Response.CartResponse;
 import com.eCommerce.CartService.Entity.Cart;
+import com.eCommerce.InventoryService.DTO.ProductDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
