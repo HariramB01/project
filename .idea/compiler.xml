@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -10,10 +11,9 @@
         <module name="UserService" />
         <module name="InventoryService" />
         <module name="Spring-Security" />
-        <module name="NotificationService" />
-        <module name="SearchService" />
         <module name="CartService" />
         <module name="ShippingService" />
+        <module name="NotificationService" />
         <module name="APIGateway" />
         <module name="OrderService" />
         <module name="WishlistService" />
@@ -23,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="KafkaService" target="17" />
+      <module name="SearchService" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

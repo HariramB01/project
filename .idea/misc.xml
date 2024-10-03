@@ -18,11 +18,13 @@
         <option value="$PROJECT_DIR$/ReviewService/pom.xml" />
         <option value="$PROJECT_DIR$/ShippingService/pom.xml" />
         <option value="$PROJECT_DIR$/KafkaService/pom.xml" />
+        <option value="$PROJECT_DIR$/Spring-Security/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/KafkaService/pom.xml" />
+        <option value="$PROJECT_DIR$/../SearchService/pom.xml" />
       </set>
     </option>
   </component>
