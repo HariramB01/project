@@ -1,4 +1,4 @@
-package com.eCommerce.APIGateway;
+package com.eCommerce.APIGateway.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
