@@ -17,7 +17,7 @@ public class User {
     private String password;
     private String email;
     private String contact;
-
+    private String role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Address> addresses = new ArrayList<>();
@@ -25,11 +25,12 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String email, String contact) {
+    public User(String username, String password, String email, String contact, String role) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.contact = contact;
+        this.role = role;
     }
 
     public Long getId() {
@@ -80,6 +81,14 @@ public class User {
         this.addresses = addresses;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -88,6 +97,7 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", contact='" + contact + '\'' +
+                ", role='" + role + '\'' +
                 ", addresses=" + addresses +
                 '}';
     }

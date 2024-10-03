@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,11 +38,17 @@ public class UserController {
     @Autowired
     private UserResponseMapper userResponseMapper;
 
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> registerUser(@RequestBody User user) {
-        logger.info("Registering user: {}", user);
-        UserResponse userResponse = userService.createUser(user);
-        return ResponseEntity.ok(userResponse);
+    public UserResponse register(@RequestBody User user) {
+        try {
+            return userService.createUser(user);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
