@@ -5,15 +5,15 @@ import com.eCommerce.CartService.Entity.Cart;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "cart-service", url = "http://localhost:8082/api/cart")
+@FeignClient(name = "cart-service")
 public interface CartClient {
 
-    @PostMapping
+    @PostMapping("/api/cart")
     Cart createCart(@RequestParam Long id);
 
-    @GetMapping("/{id}")
+    @GetMapping("/api/cart/{id}")
     Cart getCartByUserId(@PathVariable Long id);
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/cart/{id}")
     void deleteCartByUserId(@PathVariable Long id);
 }

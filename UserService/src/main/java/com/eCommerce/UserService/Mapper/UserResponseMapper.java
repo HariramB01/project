@@ -64,7 +64,7 @@ public class UserResponseMapper {
         ur.setContact(user.getContact());
         ur.setAddresses(user.getAddresses());
 
-        logger.info("Creating cart and wishlist for user ID: {}", user.getId());
+        logger.info("Fetching cart and wishlist for user ID: {}", user.getId());
 
         Cart cart = cartClient.getCartByUserId(user.getId());
         logger.info("Cart by User Id: {}", cart);

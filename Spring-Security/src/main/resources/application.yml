@@ -1,6 +1,8 @@
 spring:
+  zipkin:
+    base-url: http://localhost:9411
   application:
-    name: security-service
+    name: SECURITY-SERVICE
 
 
 eureka:
