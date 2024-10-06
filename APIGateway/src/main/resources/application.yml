@@ -3,12 +3,14 @@ server:
 
 spring:
   application:
-    name: api-gateway
+    name: API-GATEWAY
   cloud:
     gateway:
       httpclient:
-        connect-timeout: 3000 # Timeout in milliseconds to establish the connection
-        response-timeout: 5000 # Timeout in milliseconds to wait for a response
+        connect-timeout: 3000
+        response-timeout: 5000
+
+
 #  cloud:
 #    gateway:
 #      routes:
@@ -60,11 +62,6 @@ spring:
 #            - Path=/api/wishlist/**
 #          filters:
 #            - name: AuthenticationFilter
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
 
 
 
@@ -118,10 +115,3 @@ resilience4j:
         sliding-window-size: 10
         minimum-number-of-calls: 5
         automatic-transition-from-open-to-half-open-enabled: true
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: circuitbreakers, health, metrics

@@ -11,17 +11,20 @@
         <module name="UserService" />
         <module name="InventoryService" />
         <module name="Spring-Security" />
+        <module name="NotificationService" />
+        <module name="HystrixDashboard" />
         <module name="CartService" />
         <module name="ShippingService" />
-        <module name="NotificationService" />
         <module name="APIGateway" />
         <module name="OrderService" />
         <module name="WishlistService" />
         <module name="ReviewService" />
         <module name="PaymentService" />
+        <module name="CloudConfigService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="HystrixDashboard" target="17" />
       <module name="KafkaService" target="17" />
       <module name="SearchService" target="17" />
     </bytecodeTargetLevel>
@@ -30,7 +33,9 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="APIGateway" options="-parameters" />
       <module name="CartService" options="-parameters" />
+      <module name="CloudConfigService" options="-parameters" />
       <module name="EurekaServer" options="-parameters" />
+      <module name="HystrixDashboard" options="-parameters" />
       <module name="InventoryService" options="-parameters" />
       <module name="KafkaService" options="-parameters" />
       <module name="NotificationService" options="-parameters" />
