@@ -23,37 +23,40 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
     @Override
     public GatewayFilter apply(Config config) {
-        return ((exchange, chain) -> {
+        return (exchange, chain) -> {
             if (validator.isSecured.test(exchange.getRequest())) {
+                // Check if the Authorization header is present
                 if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
-                    throw new RuntimeException("missing authorization header");
+                    throw new RuntimeException("Missing authorization header");
                 }
 
+                // Extract the token from the Authorization header
                 String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-                System.out.println("Extracted JWT Token: " + authHeader);
                 if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                    authHeader = authHeader.substring(7);
+                    authHeader = authHeader.substring(7); // Remove "Bearer " prefix
                 }
+
+                // Validate the JWT token
                 try {
                     jwtUtil.validateToken(authHeader);
-
                 } catch (Exception e) {
-                    System.out.println("invalid access...!");
-                    throw new RuntimeException("un authorized access to application");
+                    System.out.println("Invalid access...!");
+                    throw new RuntimeException("Unauthorized access to application");
                 }
             }
+
+            // Continue with the filter chain if the token is valid
             return chain.filter(exchange)
                     .doOnError(error -> {
-                        System.out.println("Error occurred during filter chain execution: " + error.getMessage());
+                        System.out.println("Error during filter chain execution: " + error.getMessage());
                     })
                     .then(Mono.fromRunnable(() -> {
                         System.out.println("Post-filter execution: Request successfully passed through the filter");
                     }));
-
-        });
+        };
     }
 
     public static class Config {
-        // Add configuration properties if needed
+        // Configuration properties can be added here if needed
     }
 }
