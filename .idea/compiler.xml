@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -9,7 +10,6 @@
         <module name="EurekaServer" />
         <module name="UserService" />
         <module name="InventoryService" />
-        <module name="Spring-Security" />
         <module name="NotificationService" />
         <module name="SearchService" />
         <module name="CartService" />
@@ -22,7 +22,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Base-Domains" target="17" />
+      <module name="CloudConfigService" target="17" />
       <module name="KafkaService" target="17" />
+      <module name="Spring-Security" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

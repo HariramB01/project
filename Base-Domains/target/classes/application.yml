@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: BASE-DOMAIN
+  cloud:
+    config:
+      uri: http://localhost:9196
+  config:
+    import: configserver:http://localhost:9196
+
+server:
+  port: 8080
