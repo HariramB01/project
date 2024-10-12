@@ -1,8 +1,8 @@
 package com.eCommerce.UserService.Mapper;
 
 import com.eCommerce.CartService.Entity.Cart;
-import com.eCommerce.InventoryService.DTO.ProductDTO;
-import com.eCommerce.UserService.DTO.Wishlist;
+import com.eCommerce.basedomains.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.WishlistDTO;
 import com.eCommerce.UserService.Entity.User;
 import com.eCommerce.UserService.Feign.CartClient;
 import com.eCommerce.UserService.Feign.WishlistClient;
@@ -40,13 +40,13 @@ public class UserResponseMapper {
         Cart cart = cartClient.createCart(user.getId());
         logger.info("Cart created: {}", cart);
 
-        Wishlist wishlist = wishlistClient.createWishlist(user.getId());
-        logger.info("Wishlist created: {}", wishlist);
+        WishlistDTO wishlistDTO = wishlistClient.createWishlist(user.getId());
+        logger.info("Wishlist created: {}", wishlistDTO);
 
         WishlistResponseMapper wishlistResponseMapper = new WishlistResponseMapper();
 
         ur.setCart(cart);
-        List<ProductDTO> products = wishlistResponseMapper.productIdsToProducts(wishlist.getProductIds());
+        List<ProductDTO> products = wishlistResponseMapper.productIdsToProducts(wishlistDTO.getProductIds());
         WishlistResponse wishlistResponse = new WishlistResponse();
         wishlistResponse.setProducts(products);
         System.out.println(wishlistResponse.toString());
@@ -69,13 +69,13 @@ public class UserResponseMapper {
         Cart cart = cartClient.getCartByUserId(user.getId());
         logger.info("Cart by User Id: {}", cart);
 
-        Wishlist wishlist = wishlistClient.getWishlistByUserId(user.getId());
-        logger.info("Wishlist by User Id: {}", wishlist);
+        WishlistDTO wishlistDTO = wishlistClient.getWishlistByUserId(user.getId());
+        logger.info("Wishlist by User Id: {}", wishlistDTO);
 
         WishlistResponseMapper wishlistResponseMapper = new WishlistResponseMapper();
 
         ur.setCart(cart);
-        List<ProductDTO> products = wishlistResponseMapper.productIdsToProducts(wishlist.getProductIds());
+        List<ProductDTO> products = wishlistResponseMapper.productIdsToProducts(wishlistDTO.getProductIds());
         WishlistResponse wishlistResponse = new WishlistResponse();
         wishlistResponse.setProducts(products);
         System.out.println(wishlistResponse.toString());

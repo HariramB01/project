@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: SECURITY-SERVICE
+  cloud:
+    config:
+      uri: http://localhost:9196
+  config:
+    import: configserver:http://localhost:9196

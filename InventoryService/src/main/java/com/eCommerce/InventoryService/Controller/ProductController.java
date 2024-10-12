@@ -1,7 +1,7 @@
 package com.eCommerce.InventoryService.Controller;
 
-import com.eCommerce.InventoryService.DTO.ProductDTO;
-import com.eCommerce.InventoryService.DTO.ProductFilter;
+import com.eCommerce.basedomains.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.ProductFilter;
 import com.eCommerce.InventoryService.Entity.Product;
 import com.eCommerce.InventoryService.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

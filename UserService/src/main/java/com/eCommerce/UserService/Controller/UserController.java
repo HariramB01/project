@@ -1,13 +1,17 @@
 package com.eCommerce.UserService.Controller;
 
+import com.eCommerce.basedomains.DTO.UserDTO;
 import com.eCommerce.UserService.Entity.User;
+import com.eCommerce.UserService.Exception.MethodArgumentNotValidException;
 import com.eCommerce.UserService.Feign.CartClient;
 import com.eCommerce.UserService.Feign.WishlistClient;
 import com.eCommerce.UserService.Mapper.UserResponseMapper;
 import com.eCommerce.UserService.Response.FallBackResponse;
 import com.eCommerce.UserService.Response.UserResponse;
 import com.eCommerce.UserService.Service.UserService;
+import com.eCommerce.basedomains.DTO.UserNotificationDTO;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +41,22 @@ public class UserController {
     private UserResponseMapper userResponseMapper;
 
     @PostMapping("/register")
+<<<<<<< HEAD
     public ResponseEntity<UserResponse> registerUser(@RequestBody User user) {
         logger.info("Registering user: {}", user);
         UserResponse userResponse = userService.createUser(user);
         return ResponseEntity.ok(userResponse);
+=======
+    public ResponseEntity<UserResponse> register(@Valid @RequestBody UserDTO user) {
+        try {
+            UserResponse createdUser = userService.createUser(user);
+            return ResponseEntity.ok(createdUser);
+        } catch (MethodArgumentNotValidException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+>>>>>>> b253af3 (Cloud config & EDA)
     }
 
     @GetMapping("/{id}")
@@ -81,5 +97,12 @@ public class UserController {
         }
         userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/getEmail/{id}")
+    public ResponseEntity<UserNotificationDTO> getUsernameAndEmail(@PathVariable Long id) {
+        Optional<UserNotificationDTO> userNotificationDTO = userService.getUsernameAndEmail(id);
+        return userNotificationDTO
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

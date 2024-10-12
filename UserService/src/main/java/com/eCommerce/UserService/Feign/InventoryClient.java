@@ -1,7 +1,7 @@
 package com.eCommerce.UserService.Feign;
 
 
-import com.eCommerce.InventoryService.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.ProductDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

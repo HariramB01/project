@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 @SpringBootApplication
 @EnableEurekaServer
-@EntityScan(basePackages = {"com.project.OrderService.Entity"})
+//@EntityScan(basePackages = {"com.project.OrderService.Entity"})
 public class EurekaServerApplication {
 
 	public static void main(String[] args) {

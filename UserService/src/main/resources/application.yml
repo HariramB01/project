@@ -12,6 +12,7 @@ eureka:
 
 
 spring:
+<<<<<<< HEAD
   zipkin:
     base-url: http://localhost:9411
 
@@ -20,6 +21,15 @@ logging:
     name: C:/Users/sparrow/Downloads/Logs/loggers.log
 
 
+=======
+  application:
+    name: USER-SERVICE
+  cloud:
+    config:
+      uri: http://localhost:9196
+  config:
+    import: configserver:http://localhost:9196
+>>>>>>> b253af3 (Cloud config & EDA)
 
 management:
   health:

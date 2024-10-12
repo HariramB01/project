@@ -1,27 +1,46 @@
 package com.eCommerce.InventoryService.Service;
 
-import com.eCommerce.InventoryService.DTO.InventoryDTO;
-import com.eCommerce.InventoryService.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.InventoryDTO;
+import com.eCommerce.basedomains.DTO.ProductDTO;
 import com.eCommerce.InventoryService.Entity.Inventory;
 import com.eCommerce.InventoryService.Entity.Product;
 import com.eCommerce.InventoryService.Exception.NoItemsAvailableException;
 import com.eCommerce.InventoryService.Repository.InventoryRepository;
 import com.eCommerce.InventoryService.Repository.ProductRepository;
+import com.eCommerce.basedomains.Event.OrderFinalizedEvent;
+import com.eCommerce.basedomains.DTO.OrderProduct;
+import com.eCommerce.basedomains.DTO.OrderReq;
+import com.eCommerce.basedomains.Event.StockDeductedEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class InventoryServiceImpl implements InventoryService {
 
-    @Autowired
-    private InventoryRepository inventoryRepository;
+    private static final Logger logger = LoggerFactory.getLogger(InventoryServiceImpl.class);
+
+    private static final String STOCK_DEDUCTED_SUCCESS_TOPIC = "stock-deducted-topic-success";
+    private static final String STOCK_DEDUCTED_FAILURE_TOPIC = "stock-deducted-topic-failure";
+
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final InventoryRepository inventoryRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    public InventoryServiceImpl(KafkaTemplate<String, Object> kafkaTemplate, InventoryRepository inventoryRepository, ProductRepository productRepository) {
+        this.kafkaTemplate = kafkaTemplate;
+        this.inventoryRepository = inventoryRepository;
+        this.productRepository = productRepository;
+    }
 
     @Override
     @CacheEvict(value = "inventories", allEntries = true)
@@ -97,4 +116,83 @@ public class InventoryServiceImpl implements InventoryService {
         }
         return inventoryRepository.save(existingInventory);
     }
+
+
+//    @KafkaListener(topics = "order-event", groupId = "inventory_group")
+//    public void consumeOrderRequest(OrderReq orderReq) {
+//        List<OrderProduct> finalizedOrderProducts = new ArrayList<>();
+//        logger.info("Received order request: {}", orderReq);
+//
+//        for (OrderProduct product : orderReq.getItems()) {
+//            Optional<Product> existingProduct = productRepository.findById(product.getId());
+//
+//            if (existingProduct.isPresent() && existingProduct.get().getQuantity() >= product.getQuantity()) {
+//                Product updatedProduct = existingProduct.get();
+//                updatedProduct.setQuantity(updatedProduct.getQuantity() - product.getQuantity());
+//                productRepository.save(updatedProduct);
+//                finalizedOrderProducts.add(product);
+//                logger.info("Product updated: {}, new quantity: {}", updatedProduct.getId(), updatedProduct.getQuantity());
+//            } else {
+//                logger.warn("Product not available or insufficient quantity for product ID: {}", product.getId());
+//            }
+//        }
+//
+//        // Check if there are finalized products and send appropriate events
+//        if (finalizedOrderProducts.isEmpty()) {
+//            logger.info("No products finalized. Sending failure event.");
+//            kafkaTemplate.send(STOCK_DEDUCTED_FAILURE_TOPIC, new StockDeductedEvent(false, orderReq));
+//        } else {
+//            // Produce the OrderFinalizedEvent with finalized products
+//            OrderFinalizedEvent orderFinalizedEvent = new OrderFinalizedEvent(true, orderReq, finalizedOrderProducts);
+//            logger.info("Finalized order products: {}", finalizedOrderProducts);
+//            kafkaTemplate.send(STOCK_DEDUCTED_SUCCESS_TOPIC, new StockDeductedEvent(true, orderReq));
+//            kafkaTemplate.send("finalized-order-topic", orderFinalizedEvent); // Send to your finalized order topic
+//            logger.info("Sent finalized order event to topic 'finalized-order-topic'");
+//        }
+//    }
+
+    @KafkaListener(topics = "order-event", groupId = "inventory_group")
+    public void consumeOrderRequest(OrderReq orderReq) {
+        List<OrderProduct> finalizedOrderProducts = new ArrayList<>();
+        logger.info("Received order request: {}", orderReq);
+
+        try {
+            for (OrderProduct product : orderReq.getItems()) {
+                Optional<Product> existingProduct = productRepository.findById(product.getId());
+
+                if (existingProduct.isPresent() && existingProduct.get().getQuantity() >= product.getQuantity()) {
+                    Product updatedProduct = existingProduct.get();
+                    updatedProduct.setQuantity(updatedProduct.getQuantity() - product.getQuantity());
+                    productRepository.save(updatedProduct);
+                    finalizedOrderProducts.add(product);
+                    logger.info("Product updated: {}, new quantity: {}", updatedProduct.getId(), updatedProduct.getQuantity());
+                } else {
+                    logger.warn("Product not available or insufficient quantity for product ID: {}", product.getId());
+                    throw new NoItemsAvailableException("Insufficient stock for product ID: " + product.getId());
+                }
+            }
+
+            kafkaTemplate.send(STOCK_DEDUCTED_SUCCESS_TOPIC, new StockDeductedEvent(true, orderReq));
+
+        } catch (Exception e) {
+            logger.error("Stock deduction failed for orderReq: {}. Rolling back.", orderReq, e);
+            rollbackStock(finalizedOrderProducts);
+            kafkaTemplate.send(STOCK_DEDUCTED_FAILURE_TOPIC, new StockDeductedEvent(false, orderReq));
+        }
+    }
+
+    private void rollbackStock(List<OrderProduct> finalizedOrderProducts) {
+        for (OrderProduct product : finalizedOrderProducts) {
+            Optional<Product> existingProduct = productRepository.findById(product.getId());
+            if (existingProduct.isPresent()) {
+                Product updatedProduct = existingProduct.get();
+                updatedProduct.setQuantity(updatedProduct.getQuantity() + product.getQuantity());
+                productRepository.save(updatedProduct);
+                logger.info("Rolled back product: {}, restored quantity: {}", updatedProduct.getId(), updatedProduct.getQuantity());
+            }
+        }
+    }
+
+
+
 }

@@ -7,7 +7,7 @@ import com.eCommerce.CartService.Exception.NoItemsAvailableException;
 import com.eCommerce.CartService.Repository.CartRepository;
 import com.eCommerce.CartService.Response.CartResponse;
 import com.eCommerce.CartService.Entity.Cart;
-import com.eCommerce.InventoryService.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.ProductDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +38,13 @@ public class CartServiceImpl implements CartService {
 //            throw new ItemAlreadyExists("Cart for this User ID " + cart.getuId() + " Already Exists");
 //        }
 
-        logger.info("Creating a new cart for User ID: {}", cart.getuId());
+        logger.info("Creating a new cart for User ID: {}", cart.getUId());
         System.out.println(cart);
 
         Cart savedCart = cartRepository.save(cart);
         CartResponse cartResponse = new CartResponse();
         cartResponse.setId(savedCart.getId());
-        cartResponse.setuId(savedCart.getuId());
+        cartResponse.setuId(savedCart.getUId());
         cartResponse.setTotalAmount(savedCart.getTotalAmount());
 
         logger.info("Cart created successfully: {}", cartResponse);
@@ -76,7 +76,7 @@ public class CartServiceImpl implements CartService {
             cartRepository.save(cart);
             CartResponse cartResponse = new CartResponse();
             cartResponse.setId(cart.getId());
-            cartResponse.setuId(cart.getuId());
+            cartResponse.setuId(cart.getUId());
             cartResponse.setTotalAmount(cart.getTotalAmount());
             cartResponse.setProducts(ConvertProductIdsToProducts(cart.getProductIds()));
 

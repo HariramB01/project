@@ -1,7 +1,7 @@
 package com.eCommerce.InventoryService.Service;
 
-import com.eCommerce.InventoryService.DTO.ProductDTO;
-import com.eCommerce.InventoryService.DTO.ProductFilter;
+import com.eCommerce.basedomains.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.ProductFilter;
 import com.eCommerce.InventoryService.Entity.Product;
 
 import java.util.List;

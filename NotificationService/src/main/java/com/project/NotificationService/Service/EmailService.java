@@ -1,5 +1,8 @@
 package com.project.NotificationService.Service;
 
+import com.eCommerce.basedomains.Event.StockDeductedEvent;
+import com.eCommerce.basedomains.DTO.UserNotificationDTO;
+import com.project.NotificationService.Client.UserServiceClient;
 import com.project.NotificationService.Entity.Email;
 import com.project.NotificationService.Repository.EmailRepository;
 import com.project.OrderService.Event.OrderEvent;
@@ -19,10 +22,13 @@ public class EmailService {
     @Autowired
     private EmailRepository emailRepository;
 
+    @Autowired
+    private UserServiceClient userServiceClient;
+
     private final static Logger logger = LoggerFactory.getLogger(EmailService.class);
 
     public void sendSimpleEmail(OrderEvent event) {
-        logger.info("Email service", event.toString());
+        logger.info("Initiating email sending for OrderEvent: {}", event);
         try {
             String fromEmail = "bhariram01@gmail.com";
 
@@ -33,6 +39,7 @@ public class EmailService {
             email.setBody(event.getBody());
 
             emailRepository.save(email);
+            logger.debug("Saved email to repository: {}", email);
 
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(event.getUserEmail());
@@ -41,11 +48,46 @@ public class EmailService {
             message.setFrom(fromEmail);
 
             mailSender.send(message);
-            System.out.println("Mail sent successfully from " + fromEmail);
-            System.out.println("Successfully mail sent :"+event.toString());
+            logger.info("Mail sent successfully to {} from {}", event.getUserEmail(), fromEmail);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error occurred while sending email for OrderEvent: {}", event, e);
         }
     }
 
+    public void sendEmail(StockDeductedEvent stockDeductedEvent) {
+        logger.info("Preparing to send email for StockDeductedEvent: {}", stockDeductedEvent);
+        try {
+            String fromEmail = "bhariram01@gmail.com";
+
+            Email email = new Email();
+            email.setFromEmail(fromEmail);
+
+            UserNotificationDTO userNotificationDTO = userServiceClient.getUsernameAndEmail(stockDeductedEvent.getOrderReq().getUId()).getBody();
+            if (userNotificationDTO == null) {
+                logger.warn("No UserNotificationDTO found for User ID: {}", stockDeductedEvent.getOrderReq().getUId());
+                return;
+            }
+
+            String toEmail = userNotificationDTO.getEmail();
+            String subject = "Your User Id: " + stockDeductedEvent.getOrderReq().getUId();
+            String body = "Hello " + userNotificationDTO.getUsername() + ", your ordered products " + stockDeductedEvent.getOrderReq().getItems() + " will be delivered soon.";
+            email.setToEmail(toEmail);
+            email.setSubject(subject);
+            email.setBody(body);
+
+            emailRepository.save(email);
+            logger.debug("Saved email to repository: {}", email);
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(fromEmail);
+            message.setTo(toEmail);
+            message.setSubject(subject);
+            message.setText(body);
+
+            mailSender.send(message);
+            logger.info("Mail sent successfully to {} from {}", toEmail, fromEmail);
+        } catch (Exception e) {
+            logger.error("Error occurred while sending email for StockDeductedEvent: {}", stockDeductedEvent, e);
+        }
+    }
 }

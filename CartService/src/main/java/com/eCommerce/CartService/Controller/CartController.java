@@ -22,7 +22,7 @@ public class CartController {
     public Cart createCart(@RequestParam Long id) {
         logger.info("Creating cart for user ID: {}", id);
         Cart cart = new Cart();
-        cart.setuId(id);
+        cart.setUId(id);
         cart.setCreatedAt(LocalDateTime.now());
         cart.setUpdatedAt(LocalDateTime.now());
         return cartService.createCart(cart);

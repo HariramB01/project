@@ -15,7 +15,7 @@ public class WishlistServiceImpl implements WishlistService{
     @Override
     public Wishlist createWishlist(Long id) {
         Wishlist wishlist = new Wishlist();
-        wishlist.setuId(id);
+        wishlist.setUId(id);
         wishlist.setCreatedAt(LocalDateTime.now());
         wishlist.setUpdatedAt(LocalDateTime.now());
         return wishlistRepository.save(wishlist);

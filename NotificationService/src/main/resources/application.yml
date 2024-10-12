@@ -1,0 +1,31 @@
+<<<<<<< HEAD
+=======
+server:
+  port: 8085
+
+spring:
+  application:
+    name: NOTIFICATION-SERVICE
+  cloud:
+    config:
+      uri: http://localhost:9196
+  config:
+    import: configserver:http://localhost:9196
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+    consumer:
+      group-id: notification-consumer-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.trusted.packages: '*'
+
+>>>>>>> b253af3 (Cloud config & EDA)

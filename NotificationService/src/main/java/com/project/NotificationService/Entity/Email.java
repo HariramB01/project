@@ -1,57 +1,36 @@
 package com.project.NotificationService.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Email {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "From email is required")
+    @Size(max = 255, message = "From email must be less than 255 characters")
     private String fromEmail;
+
+    @NotBlank(message = "To email is required")
+    @Size(max = 255, message = "To email must be less than 255 characters")
     private String toEmail;
+
+    @NotBlank(message = "Subject is required")
+    @Size(max = 255, message = "Subject must be less than 255 characters")
     private String subject;
+
+    @NotBlank(message = "Body is required")
+    @Size(max = 5000, message = "Body must be less than 5000 characters")
     private String body;
 
-    // Getters and setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFromEmail() {
-        return fromEmail;
-    }
-
-    public void setFromEmail(String fromEmail) {
-        this.fromEmail = fromEmail;
-    }
-
-    public String getToEmail() {
-        return toEmail;
-    }
-
-    public void setToEmail(String toEmail) {
-        this.toEmail = toEmail;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
 }

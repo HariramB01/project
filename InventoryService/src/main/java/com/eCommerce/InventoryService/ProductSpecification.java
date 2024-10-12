@@ -1,6 +1,6 @@
 package com.eCommerce.InventoryService;
 
-import com.eCommerce.InventoryService.DTO.ProductFilter;
+import com.eCommerce.basedomains.DTO.ProductFilter;
 import com.eCommerce.InventoryService.Entity.Product;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

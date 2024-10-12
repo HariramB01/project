@@ -1,12 +1,22 @@
 package com.eCommerce.InventoryService.Entity;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "Inventory")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +26,13 @@ public class Inventory {
     @JsonManagedReference
     private List<Product> products;
 
+    @Min(value = 0, message = "Total items cannot be less than 0")
     private int totalItems;
+
+    @NotNull(message = "Inventory location cannot be null")
+    @Size(min = 2, max = 100, message = "Inventory location must be between 2 and 100 characters")
     private String inventoryLocation;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -30,76 +45,6 @@ public class Inventory {
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
-    }
-    public Inventory() {}
-
-    public Inventory(Long id, List<Product> products, int totalItems, String inventoryLocation) {
-        this.id = id;
-        this.products = products;
-        this.totalItems = totalItems;
-        this.inventoryLocation = inventoryLocation;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    public int getTotalItems() {
-        return totalItems;
-    }
-
-    public void setTotalItems(int totalItems) {
-        this.totalItems = totalItems;
-    }
-
-    public String getInventoryLocation() {
-        return inventoryLocation;
-    }
-
-    public void setInventoryLocation(String inventoryLocation) {
-        this.inventoryLocation = inventoryLocation;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    @Override
-    public String toString() {
-        return "Inventory{" +
-                "id=" + id +
-                ", totalItems=" + totalItems +
-                ", inventoryLocation='" + inventoryLocation + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
     }
 
 }

@@ -1,6 +1,6 @@
 package com.eCommerce.UserService.Mapper;
 
-import com.eCommerce.InventoryService.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.ProductDTO;
 import com.eCommerce.UserService.Feign.InventoryClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

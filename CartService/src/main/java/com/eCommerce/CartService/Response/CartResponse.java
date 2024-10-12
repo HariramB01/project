@@ -1,6 +1,6 @@
 package com.eCommerce.CartService.Response;
 
-import com.eCommerce.InventoryService.DTO.ProductDTO;
+import com.eCommerce.basedomains.DTO.ProductDTO;
 
 import java.util.ArrayList;
 import java.util.List;

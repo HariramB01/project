@@ -1,6 +1,6 @@
 package com.eCommerce.InventoryService.Controller;
 
-import com.eCommerce.InventoryService.DTO.InventoryDTO;
+import com.eCommerce.basedomains.DTO.InventoryDTO;
 import com.eCommerce.InventoryService.Entity.Inventory;
 import com.eCommerce.InventoryService.Service.InventoryService;
 import org.slf4j.Logger;
