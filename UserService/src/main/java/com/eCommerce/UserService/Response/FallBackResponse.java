@@ -5,6 +5,15 @@ public class FallBackResponse {
     private Long id;
     private String message;
 
+    // No-argument constructor
+    public FallBackResponse() {}
+
+    // Constructor for convenience
+    public FallBackResponse(Long id, String message) {
+        this.id = id;
+        this.message = message;
+    }
+
     public Long getId() {
         return id;
     }
@@ -21,5 +30,11 @@ public class FallBackResponse {
         this.message = message;
     }
 
-
+    @Override
+    public String toString() {
+        return "FallBackResponse{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

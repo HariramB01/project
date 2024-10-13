@@ -1,25 +1,25 @@
-spring:
-  zipkin:
-    base-url: http://localhost:9411
-  application:
-    name: api-gateway
-  cloud:
-    gateway:
-      routes:
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/api/v1/user/**,/api/address/**
-        - id: cart-service
-          uri: lb://cart-service
-          predicates:
-            - Path=/api/cart/**
-        - id: inventory-service
-          uri: lb://inventory-service
-          predicates:
-            - Path=/api/inventory/**, /api/products/**
-  main:
-    web-application-type: reactive
+#spring:
+#  zipkin:
+#    base-url: http://localhost:9411
+#  application:
+#    name: api-gateway
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: user-service
+#          uri: lb://user-service
+#          predicates:
+#            - Path=/api/v1/user/**,/api/address/**
+#        - id: cart-service
+#          uri: lb://cart-service
+#          predicates:
+#            - Path=/api/cart/**
+#        - id: inventory-service
+#          uri: lb://inventory-service
+#          predicates:
+#            - Path=/api/inventory/**, /api/products/**
+#  main:
+#    web-application-type: reactive
 #  doc:
 #    swagger-ui:
 #      enabled: true
@@ -38,21 +38,18 @@ spring:
 server:
   port: 8989
 
-<<<<<<< HEAD
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-=======
 spring:
   application:
     name: API-GATEWAY
   zipkin:
     base-url: http://localhost:9411
   config:
-    uri: http://localhost:9196  # Your Config Server URI
-    import: configserver:http://localhost:9196  # This line can be added for clarity
-  config.import: configserver:http://localhost:9196  # Add this line
+    uri: http://localhost:9196
+  config.import: configserver:http://localhost:9196
 
 springdoc:
   swagger-ui:
@@ -72,11 +69,3 @@ management:
   endpoint:
     shutdown:
       enabled: true
->>>>>>> b253af3 (Cloud config & EDA)
-
-springdoc:
-  swagger-ui:
-    config-url: /swagger-config.json
-    path: /swagger-ui.html
-  api-docs:
-    enabled: true

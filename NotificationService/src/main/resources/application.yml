@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 server:
   port: 8085
 
@@ -27,5 +26,3 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.trusted.packages: '*'
-
->>>>>>> b253af3 (Cloud config & EDA)

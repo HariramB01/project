@@ -1,4 +1,4 @@
-package com.eCommerce.APIGateway;
+package com.eCommerce.APIGateway.config;
 
 
 import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties;

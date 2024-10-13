@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 #spring:
 #  kafka:
 #    bootstrap-servers: localhost:9092
@@ -12,7 +12,6 @@
 #    producer:
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-=======
 server:
   port: 8087
 
@@ -48,5 +47,3 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
->>>>>>> b253af3 (Cloud config & EDA)

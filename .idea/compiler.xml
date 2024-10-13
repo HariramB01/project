@@ -7,28 +7,44 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="EurekaServer" />
+        <module name="UserService" />
+        <module name="Spring-Security" />
+        <module name="InventoryService" />
         <module name="NotificationService" />
+        <module name="Base-Domains" />
+        <module name="SearchService" />
+        <module name="CartService" />
+        <module name="ShippingService" />
+        <module name="APIGateway" />
+        <module name="OrderService" />
+        <module name="ReviewService" />
+        <module name="WishlistService" />
+        <module name="PaymentService" />
+        <module name="CloudConfigService" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="APIGateway" target="17" />
-      <module name="Base-Domains" target="17" />
-      <module name="CartService" target="17" />
-      <module name="CloudConfigService" target="17" />
-      <module name="EurekaServer" target="17" />
-      <module name="InventoryService" target="17" />
-      <module name="OrderService" target="17" />
-      <module name="PaymentService" target="17" />
-      <module name="ReviewService" target="17" />
-      <module name="ShippingService" target="17" />
-      <module name="Spring-Security" target="17" />
-      <module name="UserService" target="17" />
-      <module name="WishlistService" target="17" />
+      <module name="ApiGateway" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="APIGateway" options="-parameters" />
+      <module name="Base-Domains" options="-parameters" />
+      <module name="CartService" options="-parameters" />
+      <module name="CloudConfigService" options="-parameters" />
+      <module name="EurekaServer" options="-parameters" />
+      <module name="InventoryService" options="-parameters" />
       <module name="NotificationService" options="-parameters" />
+      <module name="OrderService" options="-parameters" />
+      <module name="PaymentService" options="-parameters" />
+      <module name="ReviewService" options="-parameters" />
+      <module name="SearchService" options="-parameters" />
+      <module name="ShippingService" options="-parameters" />
+      <module name="Spring-Security" options="-parameters" />
+      <module name="UserService" options="-parameters" />
+      <module name="WishlistService" options="-parameters" />
     </option>
   </component>
 </project>

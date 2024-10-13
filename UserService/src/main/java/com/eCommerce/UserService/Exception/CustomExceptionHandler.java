@@ -37,4 +37,12 @@ public class CustomExceptionHandler {
         errors.put("error", "An unexpected error occurred: " + e.getMessage());
         return errors;
     }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(CartWishlistServiceException.class) // Update to use the new exception
+    public Map<String, String> handleCustomFeignClientException(CartWishlistServiceException e) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", e.getMessage());
+        return errors;
+    }
 }

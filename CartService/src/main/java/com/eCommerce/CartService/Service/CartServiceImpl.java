@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
         Cart savedCart = cartRepository.save(cart);
         CartResponse cartResponse = new CartResponse();
         cartResponse.setId(savedCart.getId());
-        cartResponse.setuId(savedCart.getUId());
+        cartResponse.setUId(savedCart.getUId());
         cartResponse.setTotalAmount(savedCart.getTotalAmount());
 
         logger.info("Cart created successfully: {}", cartResponse);
@@ -76,7 +76,7 @@ public class CartServiceImpl implements CartService {
             cartRepository.save(cart);
             CartResponse cartResponse = new CartResponse();
             cartResponse.setId(cart.getId());
-            cartResponse.setuId(cart.getUId());
+            cartResponse.setUId(cart.getUId());
             cartResponse.setTotalAmount(cart.getTotalAmount());
             cartResponse.setProducts(ConvertProductIdsToProducts(cart.getProductIds()));
 

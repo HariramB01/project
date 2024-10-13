@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-<<<<<<< HEAD
 @FeignClient(name = "inventory-service", url = "http://localhost:8083/api/products")
-=======
-@FeignClient(name = "inventory-service", fallback = InventoryServiceFallback.class)
->>>>>>> b253af3 (Cloud config & EDA)
 public interface InventoryServiceClient {
 
     @GetMapping("/api/products/{id}")

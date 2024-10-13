@@ -1,27 +1,6 @@
 server:
   port: 8081
-
-eureka:
-  client:
-    register-with-eureka : true
-    fetch-registry : true
-    service-url :
-      defaultZone : http://localhost:8761/eureka/
-  instance :
-    hostname : localhost
-
-
 spring:
-<<<<<<< HEAD
-  zipkin:
-    base-url: http://localhost:9411
-
-logging:
-  file:
-    name: C:/Users/sparrow/Downloads/Logs/loggers.log
-
-
-=======
   application:
     name: USER-SERVICE
   cloud:
@@ -29,19 +8,22 @@ logging:
       uri: http://localhost:9196
   config:
     import: configserver:http://localhost:9196
->>>>>>> b253af3 (Cloud config & EDA)
 
-management:
-  health:
-    circuitbreakers:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: always
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        retryer:
+          maxAttempts: 3
+          backoff:
+            period: 2000
+            maxPeriod: 5000
+
+
+
 
 
 resilience4j:

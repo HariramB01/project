@@ -1,13 +1,15 @@
 package com.eCommerce.UserService.Mapper;
 
 import com.eCommerce.CartService.Entity.Cart;
+import com.eCommerce.UserService.Exception.CartWishlistServiceException;
+import com.eCommerce.WishlistService.Wishlist;
 import com.eCommerce.basedomains.DTO.ProductDTO;
-import com.eCommerce.basedomains.DTO.WishlistDTO;
 import com.eCommerce.UserService.Entity.User;
 import com.eCommerce.UserService.Feign.CartClient;
 import com.eCommerce.UserService.Feign.WishlistClient;
 import com.eCommerce.UserService.Response.UserResponse;
 import com.eCommerce.UserService.Response.WishlistResponse;
+import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,31 +28,72 @@ public class UserResponseMapper {
     @Autowired
     private WishlistClient wishlistClient;
 
+//    public UserResponse userToUserResponseMapper(User user) {
+//        UserResponse ur = new UserResponse();
+//        ur.setId(user.getId());
+//        ur.setUsername(user.getUsername());
+//        ur.setPassword(user.getPassword());
+//        ur.setEmail(user.getEmail());
+//        ur.setContact(user.getContact());
+//        ur.setAddresses(user.getAddresses());
+//
+//        try {
+//            logger.info("Creating cart and wishlist for user ID: {}", user.getId());
+//            Cart cart = cartClient.createCart(user.getId());
+//            logger.info("Cart created: {}", cart);
+//
+//            Wishlist wishlistDTO = wishlistClient.createWishlist(user.getId());
+//            logger.info("Wishlist created: {}", wishlistDTO);
+//
+//            WishlistResponseMapper wishlistResponseMapper = new WishlistResponseMapper();
+//
+//            ur.setCart(cart);
+//            List<ProductDTO> products = wishlistResponseMapper.productIdsToProducts(wishlistDTO.getProductIds());
+//            WishlistResponse wishlistResponse = new WishlistResponse();
+//            wishlistResponse.setProducts(products);
+//            ur.setWishlistResponse(wishlistResponse);
+//        } catch (FeignException e) {
+//            logger.error("Feign client error while creating cart/wishlist for user ID {}: {}", user.getId(), e.getMessage());
+//            throw new FeignException.FeignClientException("Error occurred while creating cart or wishlist.", e);
+//        }
+//
+//        return ur;
+//    }
+
     public UserResponse userToUserResponseMapper(User user) {
         UserResponse ur = new UserResponse();
         ur.setId(user.getId());
         ur.setUsername(user.getUsername());
-        ur.setPassword(user.getPassword());
         ur.setEmail(user.getEmail());
         ur.setContact(user.getContact());
         ur.setAddresses(user.getAddresses());
 
-        logger.info("Creating cart and wishlist for user ID:", user.getId());
+        try {
+            logger.info("Creating cart and wishlist for user ID: {}", user.getId());
 
-        Cart cart = cartClient.createCart(user.getId());
-        logger.info("Cart created: {}", cart);
+            // Create cart
+            Cart cart = cartClient.createCart(user.getId());
+            ur.setCart(cart); // Set cart in UserResponse
+            logger.info("Cart created: {}", cart);
 
-        WishlistDTO wishlistDTO = wishlistClient.createWishlist(user.getId());
-        logger.info("Wishlist created: {}", wishlistDTO);
+            // Create wishlist
+            Wishlist wishlistDTO = wishlistClient.createWishlist(user.getId());
+            logger.info("Wishlist created: {}", wishlistDTO);
 
-        WishlistResponseMapper wishlistResponseMapper = new WishlistResponseMapper();
+            WishlistResponseMapper wishlistResponseMapper = new WishlistResponseMapper();
+            List<ProductDTO> products = wishlistResponseMapper.productIdsToProducts(wishlistDTO.getProductIds());
 
-        ur.setCart(cart);
-        List<ProductDTO> products = wishlistResponseMapper.productIdsToProducts(wishlistDTO.getProductIds());
-        WishlistResponse wishlistResponse = new WishlistResponse();
-        wishlistResponse.setProducts(products);
-        System.out.println(wishlistResponse.toString());
-        ur.setWishlistResponse(wishlistResponse);
+            WishlistResponse wishlistResponse = new WishlistResponse();
+            wishlistResponse.setProducts(products);
+            ur.setWishlistResponse(wishlistResponse);
+
+        } catch (FeignException e) {
+            logger.error("Feign client error while creating cart/wishlist for user ID {}: {}", user.getId(), e.getMessage());
+            throw new CartWishlistServiceException("Error occurred while creating cart or wishlist.", e);
+        } catch (Exception e) {
+            logger.error("Unexpected error occurred while creating cart/wishlist for user ID {}: {}", user.getId(), e.getMessage());
+            throw new CartWishlistServiceException("Unexpected error occurred while creating cart or wishlist.", e);
+        }
 
         return ur;
     }
@@ -69,7 +112,7 @@ public class UserResponseMapper {
         Cart cart = cartClient.getCartByUserId(user.getId());
         logger.info("Cart by User Id: {}", cart);
 
-        WishlistDTO wishlistDTO = wishlistClient.getWishlistByUserId(user.getId());
+        Wishlist wishlistDTO = wishlistClient.getWishlistByUserId(user.getId());
         logger.info("Wishlist by User Id: {}", wishlistDTO);
 
         WishlistResponseMapper wishlistResponseMapper = new WishlistResponseMapper();

@@ -12,9 +12,10 @@ public class WishlistController {
     private WishlistService wishlistService;
 
     @PostMapping
-    public Wishlist createWishlist(@RequestParam Long id){
+    public Wishlist createWishlist(@RequestParam Long id) {
         return wishlistService.createWishlist(id);
     }
+
     @PostMapping("/addProduct")
     public Wishlist addProductToWishlist(@RequestParam Long userId, @RequestParam Long productId) {
         return wishlistService.addProductToWishlist(userId, productId);

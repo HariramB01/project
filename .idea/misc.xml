@@ -18,13 +18,10 @@
         <option value="$PROJECT_DIR$/ReviewService/pom.xml" />
         <option value="$PROJECT_DIR$/ShippingService/pom.xml" />
         <option value="$PROJECT_DIR$/KafkaService/pom.xml" />
-<<<<<<< HEAD
-=======
         <option value="$PROJECT_DIR$/Spring-Security/pom.xml" />
         <option value="$PROJECT_DIR$/HystrixDashboard/pom.xml" />
         <option value="$PROJECT_DIR$/CloudConfigService/pom.xml" />
         <option value="$PROJECT_DIR$/Base-Domains/pom.xml" />
->>>>>>> b253af3 (Cloud config & EDA)
       </list>
     </option>
     <option name="ignoredFiles">

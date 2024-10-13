@@ -1,21 +1,9 @@
 server:
   port: 8082
 
-eureka:
-  client:
-    register-with-eureka : true
-    fetch-registry : true
-    service-url :
-      defaultZone : http://localhost:8761/eureka/
-  instance :
-    hostname : localhost
-
-
 spring:
-<<<<<<< HEAD
   zipkin:
     base-url: http://localhost:9411
-=======
   application:
     name: CART-SERVICE
   cloud:
@@ -23,5 +11,4 @@ spring:
       uri: http://localhost:9196
   config:
     import: configserver:http://localhost:9196
->>>>>>> b253af3 (Cloud config & EDA)
 

@@ -25,7 +25,6 @@ public class Cart {
     private Long uId;
 
     @ElementCollection
-    // Make the product list optional during creation
     private List<Long> productIds = new ArrayList<>();
 
     @PastOrPresent(message = "Creation date cannot be in the future")
@@ -33,6 +32,8 @@ public class Cart {
 
     @PastOrPresent(message = "Update date cannot be in the future")
     private LocalDateTime updatedAt;
+
+    private double totalAmount;
 
     public void addProduct(Long productId) {
         this.productIds.add(productId);
